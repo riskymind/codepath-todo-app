@@ -1,15 +1,17 @@
-package com.asterisk.simpletodoapp
+package com.asterisk.simpletodoapp.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.asterisk.simpletodoapp.other.OnClickListener
+import com.asterisk.simpletodoapp.other.OnLongClickListener
 
 class TaskItemAdapter(
     private val listOfItems: List<String>,
-    val longClickListener: OnLongClickListener
+    val longClickListener: OnLongClickListener,
+    val clickListener: OnClickListener
 ) :
     RecyclerView.Adapter<TaskItemAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,6 +39,10 @@ class TaskItemAdapter(
             textView.setOnLongClickListener {
                 longClickListener.onItemLongClick(adapterPosition)
                 true
+            }
+
+            textView.setOnClickListener {
+                clickListener.onItemClicked(adapterPosition)
             }
         }
     }
